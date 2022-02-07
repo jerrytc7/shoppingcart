@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 const shopItems = [
   {
     id: 1,
@@ -27,6 +29,8 @@ const shopItems = [
 ]
 
 function App() {
+  const [cartItems, setCartItems] = useState([])
+
   return (
     <div className="App">
 
