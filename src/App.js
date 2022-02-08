@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 const shopItems = [
   {
     id: 1,
@@ -26,7 +28,71 @@ const shopItems = [
   },
 ]
 
+/*
+cartItems = [
+  {
+    id: 1,
+    count: 3
+  },
+  {
+    id: 2,
+    count: 2
+  }
+]
+*/
+
+/*
+  cartItems = [
+
+  ]
+*/
+
 function App() {
+  const [cartItems, setCartItems] = useState([])
+
+  const removeFromCart = (id) => {
+    setCartItems(cartItems.map((cartItem)=>{
+      if(cartItem.id === id){
+        return {
+          id: cartItem.id,
+          count: cartItem.count - 1
+        }
+      }else{
+        return cartItem
+      }
+    }).filter((cartItem)=>{
+      return cartItem.count > 0
+    }))
+  }
+
+  const addToCart = (id) => {
+    const existingItem = cartItems.some((cartItem)=>{
+      return cartItem.id === id
+    })
+    /*const count = !existingItem ? 1 : existingItem.count + 1
+    if(!existingItem){
+      count = 1
+    }else{
+      existingItem.count + 1
+    }*/
+    setCartItems(!existingItem ? [
+      ...cartItems,
+      {
+        id: id,
+        count: 1
+      }
+    ] : cartItems.map((cartItem)=>{
+        if(cartItem.id === id){
+          return {
+            id: id,
+            count: cartItem.count + 1
+          }
+        }else{
+          return cartItem
+        }
+    }))
+  }
+
   return (
     <div className="App">
 
