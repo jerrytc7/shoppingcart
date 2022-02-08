@@ -50,6 +50,21 @@ cartItems = [
 function App() {
   const [cartItems, setCartItems] = useState([])
 
+  const removeFromCart = (id) => {
+    setCartItems(cartItems.map((cartItem)=>{
+      if(cartItem.id === id){
+        return {
+          id: cartItem.id,
+          count: cartItem.count - 1
+        }
+      }else{
+        return cartItem
+      }
+    }).filter((cartItem)=>{
+      return cartItem.count > 0
+    }))
+  }
+
   const addToCart = (id) => {
     const existingItem = cartItems.some((cartItem)=>{
       return cartItem.id === id
