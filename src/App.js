@@ -1,4 +1,6 @@
 import { useState } from "react";
+import Cart from "./components/Cart";
+import Shop from "./components/Shop";
 
 const shopItems = [
   {
@@ -51,22 +53,22 @@ function App() {
   const [cartItems, setCartItems] = useState([])
 
   const removeFromCart = (id) => {
-    setCartItems(cartItems.map((cartItem)=>{
-      if(cartItem.id === id){
+    setCartItems(cartItems.map((cartItem) => {
+      if (cartItem.id === id) {
         return {
           id: cartItem.id,
           count: cartItem.count - 1
         }
-      }else{
+      } else {
         return cartItem
       }
-    }).filter((cartItem)=>{
+    }).filter((cartItem) => {
       return cartItem.count > 0
     }))
   }
 
   const addToCart = (id) => {
-    const existingItem = cartItems.some((cartItem)=>{
+    const existingItem = cartItems.some((cartItem) => {
       return cartItem.id === id
     })
     /*const count = !existingItem ? 1 : existingItem.count + 1
@@ -81,21 +83,22 @@ function App() {
         id: id,
         count: 1
       }
-    ] : cartItems.map((cartItem)=>{
-        if(cartItem.id === id){
-          return {
-            id: id,
-            count: cartItem.count + 1
-          }
-        }else{
-          return cartItem
+    ] : cartItems.map((cartItem) => {
+      if (cartItem.id === id) {
+        return {
+          id: id,
+          count: cartItem.count + 1
         }
+      } else {
+        return cartItem
+      }
     }))
   }
 
   return (
     <div className="App">
-
+      <Shop items={shopItems} onAdd={addToCart} onRemove={removeFromCart} />
+      <Cart items={cartItems} shopItems={shopItems} />
     </div>
   );
 }
