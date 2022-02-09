@@ -30,25 +30,6 @@ const shopItems = [
   },
 ]
 
-/*
-cartItems = [
-  {
-    id: 1,
-    count: 3
-  },
-  {
-    id: 2,
-    count: 2
-  }
-]
-*/
-
-/*
-  cartItems = [
-
-  ]
-*/
-
 function App() {
   const [cartItems, setCartItems] = useState([])
 
@@ -71,12 +52,6 @@ function App() {
     const existingItem = cartItems.some((cartItem) => {
       return cartItem.id === id
     })
-    /*const count = !existingItem ? 1 : existingItem.count + 1
-    if(!existingItem){
-      count = 1
-    }else{
-      existingItem.count + 1
-    }*/
     setCartItems(!existingItem ? [
       ...cartItems,
       {
